@@ -9,7 +9,4 @@ COPY ./fronted/ /var/www/html/
 # Habilita mod_rewrite para URLs amigables
 RUN a2enmod rewrite
 
-# Establece permisos adecuados
-RUN chown -R www-data:www-data /var/www/html
-
 EXPOSE 80
