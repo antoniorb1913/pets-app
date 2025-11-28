@@ -1,14 +1,10 @@
 <?php
-$api_url = getenv('API_URL') ?: 'https://pets-app-2.onrender.com/pet/list';
-$data = @file_get_contents($api_url);
 
-if ($data) {
-    $pets = json_decode($data, true);
-    // Aquí procesas $pets
-    echo "Datos recibidos correctamente";
-} else {
-    echo "Error al conectar con el backend";
-}
+$api_url = getenv('API_URL') ?: 'https://pets-app-2.onrender.com/pet/list';
+$data = file_get_contents($api_url);
+//Json to Array
+$pets = json_decode($data, true);
+
 ?>
 <html>
 <head>
