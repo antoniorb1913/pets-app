@@ -1,7 +1,6 @@
 <?php
 
-$api_url = getenv('API_URL') ?: 'https://pets-app-2.onrender.com/pet/list';
-print_r($api_url);
+$api_url = getenv('API_URL') ?: 'https://pets-app.onrender.com/pet/list';
 $data = @file_get_contents($api_url);
 //Json to Array
 $pets = json_decode($data, true);
