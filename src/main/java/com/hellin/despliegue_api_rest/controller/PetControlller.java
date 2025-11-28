@@ -1,8 +1,12 @@
 package com.hellin.despliegue_api_rest.controller;
 
 import com.hellin.despliegue_api_rest.entity.Pet;
+import com.hellin.despliegue_api_rest.dto.PetDto;
 import com.hellin.despliegue_api_rest.repository.PetRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,5 +38,26 @@ public class PetControlller {
     @GetMapping("/list")
     public List<Pet> hello(){
         return petRepository.findAll();
+    }
+
+    @PostMapping("/adopt/{id}")
+    // RedirectView --> redirigir al navegador a otra URL desde un controlador.
+    public Pet adopt(@PathVariable long id) {
+        Pet pet = petRepository.findById(id).get();
+
+        pet.setAdopt(true);
+        return petRepository.save(pet); 
+    }
+
+    @PostMapping("/add")
+    public Pet addPet(@ModelAttribute PetDto petDto) {
+        Pet pet = new Pet();
+        pet.setName(petDto.getName());
+        pet.setBorn(petDto.getBorn());
+        pet.setChip(petDto.getChip());
+        pet.setCategory(petDto.getCategory());
+        pet.setAdopt(false);
+        
+        return petRepository.save(pet);
     }
 }
